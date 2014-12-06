@@ -25,15 +25,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var xIndex;
+            <string>// Create the background objects
+var xIndex;
 var yIndex;
 
 for(yIndex=0; yIndex&lt;yBlocks; yIndex++)
 {
     for(xIndex=0; xIndex&lt;xBlocks; xIndex++)
     {
-        /*if((xIndex+yIndex)%2 == 0)
-            continue;*/
         newInst = instance_create((blockSize/2)+(xIndex*blockSize), (blockSize/2)+(yIndex*blockSize), obj_enemy);
         with(newInst)
         {
@@ -41,6 +40,9 @@ for(yIndex=0; yIndex&lt;yBlocks; yIndex++)
         }
     }
 }
+
+// Create the player
+instance_create(room_width/2, room_height/2, obj_char);
 </string>
           </argument>
         </arguments>

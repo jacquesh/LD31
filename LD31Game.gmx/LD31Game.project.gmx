@@ -39,13 +39,11 @@
     <object>objects\obj_enemy</object>
     <object>objects\obj_gameController</object>
     <object>objects\obj_char</object>
-    <object>objects\obj_control</object>
     <objects name="Guns">
       <object>objects\obj_gunParent</object>
     </objects>
   </objects>
   <rooms name="rooms">
-    <room>rooms\room_temp</room>
     <room>rooms\room_startupRoom</room>
   </rooms>
   <help>

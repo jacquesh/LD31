@@ -90,13 +90,14 @@ else
           <argument>
             <kind>1</kind>
             <string>///Rotation
-image_angle = point_direction(x, y, mouse_x, mouse_y);
+dir = point_direction(x, y, mouse_x, mouse_y);
+image_angle = dir - 115;
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="4" ename="obj_enemy">
+    <event eventtype="4" ename="obj_enemyParent">
       <action>
         <libid>1</libid>
         <id>605</id>

@@ -26,14 +26,22 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\spr_char</sprite>
-    <sprite>sprites\spr_bullet</sprite>
     <sprite>sprites\spr_null</sprite>
+    <sprites name="Projectiles">
+      <sprite>sprites\spr_proj_basic</sprite>
+    </sprites>
+    <sprites name="Enemies">
+      <sprite>sprites\spr_enemyBase8</sprite>
+      <sprite>sprites\spr_enemyBase16</sprite>
+      <sprite>sprites\spr_enemyBase32</sprite>
+      <sprite>sprites\spr_enemyBase64</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\script_createEnemy.gml</script>
-    <script>scripts\script_createDesktopSurface.gml</script>
+    <script>scripts\create_enemy.gml</script>
+    <script>scripts\create_desktopSurface.gml</script>
     <script>scripts\set_gun.gml</script>
     <script>scripts\create_projectile.gml</script>
   </scripts>
@@ -41,7 +49,6 @@
     <object>objects\obj_startupHandler</object>
     <object>objects\obj_gameController</object>
     <object>objects\obj_emptinessCollider</object>
-    <object>objects\obj_enemy</object>
     <object>objects\obj_char</object>
     <objects name="Guns">
       <object>objects\obj_gunParent</object>
@@ -50,6 +57,18 @@
     <objects name="Projectiles">
       <object>objects\obj_projParent</object>
       <object>objects\obj_proj_basic</object>
+    </objects>
+    <objects name="Enemies">
+      <object>objects\obj_enemyParent</object>
+      <object>objects\obj_enemy_basic</object>
+      <object>objects\obj_enemy_behemoth</object>
+      <object>objects\obj_enemy_shield1</object>
+      <object>objects\obj_enemy_shield2</object>
+      <object>objects\obj_enemy_shield3</object>
+      <object>objects\obj_enemy_shield4</object>
+      <object>objects\obj_enemy_splitlet</object>
+      <object>objects\obj_enemy_splitter</object>
+      <object>objects\obj_enemy_tank</object>
     </objects>
   </objects>
   <rooms name="rooms">

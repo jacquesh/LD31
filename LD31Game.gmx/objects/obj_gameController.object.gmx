@@ -52,7 +52,7 @@ char = instance_create(room_width/2, room_height/2, obj_char);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>script_createEnemy(0,0);
+            <string>create_enemy(0,0);
 </string>
           </argument>
         </arguments>

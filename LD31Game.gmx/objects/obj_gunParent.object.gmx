@@ -91,7 +91,7 @@ x = char.x;
 y = char.y;
 
 //Rotate
-direction = char.image_angle;
+direction = char.dir;
 </string>
           </argument>
         </arguments>

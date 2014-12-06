@@ -44,7 +44,7 @@ blockSize = 32;
 xBlocks = floor(backgroundWidth/blockSize) + 1;
 yBlocks = floor(backgroundHeight/blockSize) + 1;
 
-script_createDesktopSurface();
+create_desktopSurface();
 
 var emptinessTemplateSurface = surface_create(blockSize, blockSize);
 surface_set_target(emptinessTemplateSurface);

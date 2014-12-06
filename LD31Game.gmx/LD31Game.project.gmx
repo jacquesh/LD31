@@ -45,6 +45,8 @@
     <script>scripts\create_projectile.gml</script>
     <script>scripts\set_enemy.gml</script>
     <script>scripts\set_gun.gml</script>
+    <script>scripts\get_shieldLocation_x.gml</script>
+    <script>scripts\get_shieldLocation_y.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_startupHandler</object>

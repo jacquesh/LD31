@@ -29,6 +29,36 @@
 globalvar char;
 char = instance_create(room_width/2, room_height/2, obj_char);
 
+// Setup enemy spawning queue
+global.enemySpawnLocQueue = ds_priority_create();
+var testVal;
+testVal[0] = 0;
+testVal[1] = 0;
+ds_priority_add(global.enemySpawnLocQueue, testVal, 0);
+/*for(var yIndex=0; yIndex&lt;global.yBlocks; yIndex++)
+{
+    var pqValLeft;
+    pqValLeft[0] = 0;
+    pqValLeft[1] = yIndex;
+    ds_priority_add(global.enemySpawnLocQueue, pqValLeft, random(1)); //Can we not make structs? how do we store (x,y) pairs?
+    
+    var pqValRight;
+    pqValRight[0] = global.xBlocks-1;
+    pqValRight[1] = yIndex;
+}
+
+for(var xIndex=0; xIndex&lt;global.xBlocks; xIndex++)
+{
+    var pqValTop;
+    pqValTop[0] = xIndex;
+    pqValTop[1] = 0;
+    ds_priority_add(global.enemySpawnLocQueue, pqValTop, random(1));
+    
+    var pqValBottom;
+    pqValBottom[0] = xIndex;
+    pqValBottom[1] = global.yBlocks-1;
+    ds_priority_add(global.enemySpawnLocQueue, pqValBottom, random(1));
+}*/
 
 </string>
           </argument>
@@ -46,13 +76,13 @@ char = instance_create(room_width/2, room_height/2, obj_char);
         <exetype>2</exetype>
         <functionname></functionname>
         <codestring></codestring>
-        <whoName>self</whoName>
+        <whoName>obj_gameController</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>script_createEnemy(0,0);
+            <string>script_createEnemy();
 </string>
           </argument>
         </arguments>

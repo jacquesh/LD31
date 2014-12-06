@@ -47,10 +47,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(x &lt; 100)
-{
-    image_blend = c_red;
-}
+            <string>image_blend = c_red;
 draw_self();
 </string>
           </argument>

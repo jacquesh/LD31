@@ -36,6 +36,9 @@ globalvar yBlocks;
 
 globalvar emptinessCollider;
 
+globalvar enemySpawnLocQueue;
+globalvar blockExists;
+
 backgroundImage = background_add("bgImage.png", 0, 0);
 backgroundWidth = background_get_width(backgroundImage);
 backgroundHeight = background_get_height(backgroundImage);
@@ -43,6 +46,14 @@ backgroundHeight = background_get_height(backgroundImage);
 blockSize = 32;
 xBlocks = floor(backgroundWidth/blockSize) + 1;
 yBlocks = floor(backgroundHeight/blockSize) + 1;
+
+for(var yIndex=0; yIndex&lt;yBlocks; yIndex++)
+{
+    for(var xIndex=0; xIndex&lt;xBlocks; xIndex++)
+    {
+        blockExists[yIndex, xIndex] = true;
+    }
+}
 
 script_createDesktopSurface();
 
@@ -52,8 +63,6 @@ draw_clear(c_black);
 surface_reset_target();
 emptinessSprite = sprite_create_from_surface(emptinessTemplateSurface, 0, 0, blockSize, blockSize, false, false, 0, 0);
 
-var xIndex;
-var yIndex;
 
 gameRoom = room_add();
 room_set_width(gameRoom, backgroundWidth);

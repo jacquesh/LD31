@@ -32,7 +32,8 @@
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\script_newGun.gml</script>
+    <script>scripts\set_gun.gml</script>
+    <script>scripts\create_projectile.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_startupHandler</object>
@@ -41,6 +42,11 @@
     <object>objects\obj_char</object>
     <objects name="Guns">
       <object>objects\obj_gunParent</object>
+      <object>objects\obj_gun_basic</object>
+    </objects>
+    <objects name="Projectiles">
+      <object>objects\obj_projParent</object>
+      <object>objects\obj_proj_basic</object>
     </objects>
   </objects>
   <rooms name="rooms">

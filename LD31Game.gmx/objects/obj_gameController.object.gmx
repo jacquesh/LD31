@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>1000</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -42,7 +42,8 @@ for(yIndex=0; yIndex&lt;yBlocks; yIndex++)
 }
 
 // Create the player
-instance_create(room_width/2, room_height/2, obj_char);
+globalvar char;
+char = instance_create(room_width/2, room_height/2, obj_char);
 </string>
           </argument>
         </arguments>

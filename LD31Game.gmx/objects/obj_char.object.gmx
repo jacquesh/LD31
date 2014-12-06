@@ -6,7 +6,7 @@
   <depth>-10</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
-  <maskName>&lt;undefined&gt;</maskName>
+  <maskName>spr_null</maskName>
   <events>
     <event eventtype="0" enumb="0">
       <action>
@@ -26,6 +26,10 @@
           <argument>
             <kind>1</kind>
             <string>spd = 10;
+
+//Basic gun that you always have
+gunBase = instance_create(x, y, obj_gun_basic);
+gun = gunBase;
 </string>
           </argument>
         </arguments>
@@ -48,7 +52,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Movement
+            <string>///Movement
 v = 0; //Vertical component
 h = 0; //Horizontal component
 
@@ -66,15 +70,28 @@ else
 {
     speed = 0;
 }
-
-//Image
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Rotation
 image_angle = point_direction(x, y, mouse_x, mouse_y);
-
-//Shooting
-if(mouse_check_button(mb_left))
-{
-    //shoot bullet
-}
 </string>
           </argument>
         </arguments>

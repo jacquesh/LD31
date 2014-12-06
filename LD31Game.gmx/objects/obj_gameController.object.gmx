@@ -52,7 +52,7 @@ char = instance_create(room_width/2, room_height/2, obj_char);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>instance_create(mouse_x, mouse_y, obj_enemy_basic);
+            <string>instance_create(mouse_x, mouse_y, obj_enemy_splitter);
 </string>
           </argument>
         </arguments>

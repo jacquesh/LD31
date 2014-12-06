@@ -67,7 +67,7 @@
       <object>objects\obj_enemy_shield2</object>
       <object>objects\obj_enemy_shield3</object>
       <object>objects\obj_enemy_shield4</object>
-      <object>objects\obj_enemy_splitlet</object>
+      <object>objects\obj_enemy_splitlett</object>
       <object>objects\obj_enemy_splitter</object>
       <object>objects\obj_enemy_tank</object>
     </objects>

@@ -28,7 +28,7 @@
             <string>set_enemy(3, 4);
 rot_speed = random_range(-5, 5);
 
-//Small chance to split into Splitlets
+//Small chance to split into Splitletts
 timer = 0;
 split = false;
 if(random(100)&lt;15)
@@ -83,7 +83,7 @@ if(random(100)&lt;15)
         {
             for(i=0; i&lt;life; i++)
             {
-                obj = instance_create(x, y, obj_enemy_splitlet);
+                obj = instance_create(x, y, obj_enemy_splitlett);
                 obj.direction = image_angle + i*90;
             }
             //TODO get split images

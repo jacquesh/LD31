@@ -26,7 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>/// Create initial room objects
-instance_create(room_width/2, room_height/2, obj_char);
+globalvar char;
+char = instance_create(room_width/2, room_height/2, obj_char);
 global.emptinessCollider = instance_create(0, 0, obj_emptinessCollider);
 </string>
           </argument>

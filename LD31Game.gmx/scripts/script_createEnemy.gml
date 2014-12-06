@@ -7,23 +7,6 @@ var spawnY = yIndex*global.blockSize;
 
 
 // Draw emptiness where the object will spawn
-/*if(!surface_exists(global.emptinessSurface))
-{
-    script_createEmptinessSurface()
-}
-if(!surface_exists(global.emptinessTemplateSurface))
-{
-    script_createEmptinessTemplateSurface();
-}
-surface_copy_part(global.emptinessSurface, spawnX, spawnY,
-                  global.emptinessTemplateSurface, 0, 0,
-                  global.blockSize, global.blockSize);
-var newSprite = sprite_create_from_surface(global.emptinessSurface, 
-                                           0, 0,
-                                           global.backgroundWidth, global.backgroundHeight,
-                                           false, false,
-                                           0,0);
-global.emptinessCollider.sprite_index = newSprite;*/
 var newEmptiness = instance_create(spawnX, spawnY, obj_emptinessCollider);
 newEmptiness.sprite_index = global.emptinessSprite;
 

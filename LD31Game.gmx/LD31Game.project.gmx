@@ -33,11 +33,16 @@
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\script_newGun.gml</script>
+    <script>scripts\script_createEnemy.gml</script>
+    <script>scripts\script_createEmptinessSurface.gml</script>
+    <script>scripts\script_createEmptinessTemplateSurface.gml</script>
+    <script>scripts\script_createDesktopSurface.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_startupHandler</object>
-    <object>objects\obj_enemy</object>
     <object>objects\obj_gameController</object>
+    <object>objects\obj_emptinessCollider</object>
+    <object>objects\obj_enemy</object>
     <object>objects\obj_char</object>
     <objects name="Guns">
       <object>objects\obj_gunParent</object>

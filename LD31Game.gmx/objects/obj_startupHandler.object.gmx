@@ -25,38 +25,32 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>bg = background_add("bgImage.png", 0, 0);
-w = background_get_width(bg);
-h = background_get_height(bg);
-
-surface = surface_create(w,h);
-surface_set_target(surface);
-draw_clear(c_black);
-draw_background(bg, 0,0);
-surface_reset_target();
-
+            <string>globalvar backgroundWidth;
+globalvar backgroundHeight;
+globalvar backgroundImage;
+globalvar desktopSurface;
+globalvar emptinessSurface;
+globalvar emptinessTemplateSurface;
 globalvar blockSize;
-globalvar blockSprites;
 globalvar xBlocks;
 globalvar yBlocks;
 
-var xIndex;
-var yIndex;
+globalvar emptinessCollider;
+
+backgroundImage = background_add("bgImage.png", 0, 0);
+backgroundWidth = background_get_width(backgroundImage);
+backgroundHeight = background_get_height(backgroundImage);
 
 blockSize = 32;
-xBlocks = floor(w/blockSize);
-yBlocks = floor(h/blockSize);
-for(yIndex=0; yIndex&lt;yBlocks; yIndex++)
-{
-    for(xIndex=0; xIndex&lt;xBlocks; xIndex++)
-    {
-        blockSprites[yIndex,xIndex] = sprite_create_from_surface(surface,
-                                                        xIndex*blockSize, yIndex*blockSize,
-                                                        blockSize,blockSize, false, false,
-                                                        blockSize/2, blockSize/2);       
-    }
-}
-surface_free(surface);
+xBlocks = floor(backgroundWidth/blockSize);
+yBlocks = floor(backgroundHeight/blockSize);
+
+script_createDesktopSurface();
+script_createEmptinessSurface();
+script_createEmptinessTemplateSurface();
+
+var xIndex;
+var yIndex;
 
 gameRoom = room_add();
 room_set_width(gameRoom, global.xBlocks*global.blockSize);

@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>100</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -25,24 +25,55 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// Create the background objects
-var xIndex;
-var yIndex;
-
-for(yIndex=0; yIndex&lt;yBlocks; yIndex++)
-{
-    for(xIndex=0; xIndex&lt;xBlocks; xIndex++)
-    {
-        newInst = instance_create((blockSize/2)+(xIndex*blockSize), (blockSize/2)+(yIndex*blockSize), obj_enemy);
-        with(newInst)
-        {
-            sprite_index = blockSprites[yIndex,xIndex];
-        }
-    }
-}
-
-// Create the player
+            <string>/// Create initial room objects
 instance_create(room_width/2, room_height/2, obj_char);
+global.emptinessCollider = instance_create(0, 0, obj_emptinessCollider);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="53">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>script_createEnemy(0,0);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_background(global.backgroundImage, 0,0);
 </string>
           </argument>
         </arguments>

@@ -40,10 +40,11 @@
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\create_enemy.gml</script>
     <script>scripts\create_desktopSurface.gml</script>
-    <script>scripts\set_gun.gml</script>
+    <script>scripts\create_enemy.gml</script>
     <script>scripts\create_projectile.gml</script>
+    <script>scripts\set_enemy.gml</script>
+    <script>scripts\set_gun.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_startupHandler</object>

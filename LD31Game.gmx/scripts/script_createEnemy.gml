@@ -42,5 +42,6 @@ var newInst = instance_create(spawnX + (global.blockSize/2),
                           spawnY+(global.blockSize/2),
                           obj_enemy);
 newInst.sprite_index = newSprite;
+newInst.mask_index = newSprite;
 
 return newInst;

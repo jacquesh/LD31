@@ -28,7 +28,8 @@
             <string>/// Create initial room objects
 globalvar char;
 char = instance_create(room_width/2, room_height/2, obj_char);
-global.emptinessCollider = instance_create(0, 0, obj_emptinessCollider);
+
+
 </string>
           </argument>
         </arguments>
@@ -74,10 +75,27 @@ global.emptinessCollider = instance_create(0, 0, obj_emptinessCollider);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_background(global.backgroundImage, 0,0);
+            <string>//draw_background(global.backgroundImage, 0,0);
+//draw_background_ext(global.backgroundImage, 0,0, 1,1, 0, -1, 1);
 </string>
           </argument>
         </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="27">
+      <action>
+        <libid>1</libid>
+        <id>332</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_end_game</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
       </action>
     </event>
   </events>

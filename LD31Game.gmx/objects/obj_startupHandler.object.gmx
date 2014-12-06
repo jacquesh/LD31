@@ -29,8 +29,7 @@
 globalvar backgroundHeight;
 globalvar backgroundImage;
 globalvar desktopSurface;
-globalvar emptinessSurface;
-globalvar emptinessTemplateSurface;
+globalvar emptinessSprite;
 globalvar blockSize;
 globalvar xBlocks;
 globalvar yBlocks;
@@ -42,26 +41,24 @@ backgroundWidth = background_get_width(backgroundImage);
 backgroundHeight = background_get_height(backgroundImage);
 
 blockSize = 32;
-xBlocks = floor(backgroundWidth/blockSize);
-yBlocks = floor(backgroundHeight/blockSize);
+xBlocks = floor(backgroundWidth/blockSize) + 1;
+yBlocks = floor(backgroundHeight/blockSize) + 1;
 
 script_createDesktopSurface();
-script_createEmptinessSurface();
-script_createEmptinessTemplateSurface();
+
+var emptinessTemplateSurface = surface_create(blockSize, blockSize);
+surface_set_target(emptinessTemplateSurface);
+draw_clear(c_black);
+surface_reset_target();
+emptinessSprite = sprite_create_from_surface(emptinessTemplateSurface, 0, 0, blockSize, blockSize, false, false, 0, 0);
 
 var xIndex;
 var yIndex;
 
 gameRoom = room_add();
-room_set_width(gameRoom, global.xBlocks*global.blockSize);
-room_set_height(gameRoom, global.yBlocks*global.blockSize);
-room_set_view(gameRoom, 0, true, 0, 0,
-                global.xBlocks*global.blockSize,
-                global.yBlocks*global.blockSize,
-                0, 0,
-                global.xBlocks*global.blockSize,
-                global.yBlocks*global.blockSize,
-                0, 0, 0, 0, -1);
+room_set_width(gameRoom, backgroundWidth);
+room_set_height(gameRoom, backgroundHeight);
+room_set_background(gameRoom, 0, true, false, backgroundImage, 0, 0, true, true, 0, 0, 1);
 
 room_instance_add(gameRoom, 0,0, obj_gameController);
 room_goto(gameRoom);

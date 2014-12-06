@@ -7,7 +7,7 @@ var spawnY = yIndex*global.blockSize;
 
 
 // Draw emptiness where the object will spawn
-if(!surface_exists(global.emptinessSurface))
+/*if(!surface_exists(global.emptinessSurface))
 {
     script_createEmptinessSurface()
 }
@@ -23,8 +23,9 @@ var newSprite = sprite_create_from_surface(global.emptinessSurface,
                                            global.backgroundWidth, global.backgroundHeight,
                                            false, false,
                                            0,0);
-global.emptinessCollider.sprite_index = newSprite;
-
+global.emptinessCollider.sprite_index = newSprite;*/
+var newEmptiness = instance_create(spawnX, spawnY, obj_emptinessCollider);
+newEmptiness.sprite_index = global.emptinessSprite;
 
 // Create the sprite for the new object
 if(!surface_exists(global.desktopSurface))

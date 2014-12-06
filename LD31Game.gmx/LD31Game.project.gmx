@@ -33,8 +33,6 @@
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\script_createEnemy.gml</script>
-    <script>scripts\script_createEmptinessSurface.gml</script>
-    <script>scripts\script_createEmptinessTemplateSurface.gml</script>
     <script>scripts\script_createDesktopSurface.gml</script>
     <script>scripts\set_gun.gml</script>
     <script>scripts\create_projectile.gml</script>

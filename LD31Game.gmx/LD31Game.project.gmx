@@ -24,16 +24,29 @@
   </datafiles>
   <NewExtensions/>
   <sounds name="sound"/>
-  <sprites name="sprites"/>
+  <sprites name="sprites">
+    <sprite>sprites\spr_char</sprite>
+    <sprite>sprites\spr_bullet</sprite>
+    <sprite>sprites\spr_null</sprite>
+  </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\script_newGun.gml</script>
+  </scripts>
   <objects name="objects">
-    <object>objects\startupHandler</object>
-    <object>objects\enemy</object>
-    <object>objects\gameController</object>
+    <object>objects\obj_startupHandler</object>
+    <object>objects\obj_enemy</object>
+    <object>objects\obj_gameController</object>
+    <object>objects\obj_char</object>
+    <object>objects\obj_control</object>
+    <objects name="Guns">
+      <object>objects\obj_gunParent</object>
+    </objects>
   </objects>
   <rooms name="rooms">
-    <room>rooms\startupRoom</room>
+    <room>rooms\room_temp</room>
+    <room>rooms\room_startupRoom</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

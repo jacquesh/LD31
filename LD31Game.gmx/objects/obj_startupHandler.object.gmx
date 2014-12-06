@@ -69,7 +69,7 @@ room_set_view(gameRoom, 0, true, 0, 0,
                 global.yBlocks*global.blockSize,
                 0, 0, 0, 0, -1);
 
-room_instance_add(gameRoom, 0,0, gameController);
+room_instance_add(gameRoom, 0,0, obj_gameController);
 room_goto(gameRoom);
 </string>
           </argument>

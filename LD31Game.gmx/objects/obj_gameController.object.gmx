@@ -34,7 +34,7 @@ for(yIndex=0; yIndex&lt;yBlocks; yIndex++)
     {
         /*if((xIndex+yIndex)%2 == 0)
             continue;*/
-        newInst = instance_create((blockSize/2)+(xIndex*blockSize), (blockSize/2)+(yIndex*blockSize), enemy);
+        newInst = instance_create((blockSize/2)+(xIndex*blockSize), (blockSize/2)+(yIndex*blockSize), obj_enemy);
         with(newInst)
         {
             sprite_index = blockSprites[yIndex,xIndex];

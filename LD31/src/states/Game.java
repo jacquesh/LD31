@@ -182,7 +182,7 @@ public class Game implements iState
         double timeLeft = (WAVE_LENGTH - waveTime)/30.0;
         g.setColor(Color.white);
         g.setFont(countdownFont);
-        g.drawString(String.format("%.2f", timeLeft), Canvas.hSize/2 - 50, Canvas.vSize - 10);
+        g.drawString(String.format("%05.2f", timeLeft), Canvas.hSize/2 - 50, Canvas.vSize - 10);
     }
 
     private void spawnEnemy()

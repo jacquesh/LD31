@@ -16,7 +16,7 @@ public enum eControl implements iSubject
     INSTANCE;
     
     private States currentState;
-    private ArrayList<iObserver> observers = new ArrayList<>();
+    public ArrayList<iObserver> observers = new ArrayList<>();
     public Player player = null;
 
     /**
@@ -56,6 +56,8 @@ public enum eControl implements iSubject
     {
         currentState.state.draw(g);
         notifyDraw(g);
+
+        currentState.state.postDraw(g);
     }
     
     /**

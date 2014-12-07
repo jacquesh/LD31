@@ -20,13 +20,9 @@ public class Player
     
     public Player()
     {
-        x = Canvas.hSize/2;
-        y = Canvas.vSize/2;
-        direction = 0;
+        reset();
         friction = 2;
-        speed = 0;
         speedMax = 12;
-        health = 100;
         
         up = false;
         down = false;
@@ -37,6 +33,15 @@ public class Player
         spr = new Sprite(Utility.loadImage("/Resources/Images/Units/player.png"), 9, 19);
     }
     
+    public void reset()
+    {
+        x = Canvas.hSize/2;
+        y = Canvas.vSize/2;
+        direction = 0;
+        speed = 0;
+        health = 100;
+    }
+
     public void update()
     {
         int v = 0;

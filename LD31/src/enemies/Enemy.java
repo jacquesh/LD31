@@ -12,7 +12,7 @@ public abstract class Enemy implements iObserver
     protected static final BufferedImage highlight32 = Utility.loadImage("/Resources/Images/Enemies/enemyBorder64.png");
     protected static final BufferedImage highlight16 = Utility.loadImage("/Resources/Images/Enemies/enemyBorder64.png");
 
-    protected double x, y, direction, speed, speedMax, health;
+    public double x, y, direction, speed, speedMax, health;
     protected double rotation, rotationSpeed, fade;
     protected Sprite spr;
 

@@ -5,30 +5,54 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 import java.util.PriorityQueue;
+import java.util.ArrayList;
 
 import core.Canvas;
 import core.Main;
+import enemies.Enemy;
 import enemies.Basic;
 import units.Player;
 import units.Emptiness;
+import units.Destroyer;
 import util.GridPoint;
 
 public class Game implements iState
 {
     public static final int GRID_SIZE = 32;
+    public static final int WAVE_LENGTH = 30*20; //20 seconds
+    public static final int WAVE_END_LENGTH = 30*3; //3 seconds
 
     Player player;
 
     public PriorityQueue<GridPoint> spawnLocQueue;
     public boolean[][] spawnLocUsed;
-    
+    public int currentWave;
+
+    private int spawnInterval;
+    private int timeToSpawn;
+    private int waveTime;
+    private int waveEndTime;
+    private boolean waveEnded;
+
+    private ArrayList<iObserver> destroyList;
+    private Destroyer destroyer;
+
     @Override
     public void init()
     {
         player = new Player();
         control.player = player;
-
         spawnLocQueue = new PriorityQueue<GridPoint>(64);
+        destroyList = new ArrayList<iObserver>();
+        destroyer = new Destroyer();
+        currentWave = 0;
+
+        reset();
+        player.reset();
+    }
+
+    private void reset()
+    {
         int xBlocks = Canvas.hSize/GRID_SIZE;
         int yBlocks = Canvas.vSize/GRID_SIZE;
 
@@ -41,6 +65,7 @@ public class Game implements iState
             }
         }
 
+        spawnLocQueue.clear();
         for(int y=0; y<yBlocks; ++y)
         {
             spawnLocQueue.add(new GridPoint(0, y));
@@ -51,11 +76,73 @@ public class Game implements iState
             spawnLocQueue.add(new GridPoint(x, 0));
             spawnLocQueue.add(new GridPoint(x, yBlocks-1));
         }
+
+        destroyer.x = -64;
+
+        spawnInterval = 30;
+        waveTime = 0;
+        waveEndTime = 0;
+        waveEnded = false;
+        timeToSpawn = spawnInterval;
     }
 
     @Override
     public void update()
     {
+        if(waveEnded)
+        {
+            destroyer.x += 200;
+            for(int i=destroyList.size()-1; i>=0; --i)
+            {
+                iObserver obs = destroyList.get(i);
+                if(obs instanceof Enemy)
+                {
+                    Enemy e = (Enemy)obs;
+                    if(e.x < destroyer.x)
+                        control.observers.remove(e);
+                }
+                else if(obs instanceof Emptiness)
+                {
+                    Emptiness e = (Emptiness)obs;
+                    if(e.x < destroyer.x)
+                        control.observers.remove(e);
+                }
+            }
+            ++waveEndTime;
+            if(waveEndTime > WAVE_END_LENGTH)
+            {
+                waveEnded = false;
+                waveEndTime = 0;
+                reset();
+            }
+        }
+        else
+        {
+            ++waveTime;
+            if(waveTime >= WAVE_LENGTH)
+            {
+                currentWave = (currentWave < 4) ? currentWave+1 : currentWave; //Clamp to 4
+                waveTime = 0;
+                waveEnded = true;
+                for(iObserver iob : control.observers)
+                {
+                    if((iob instanceof Enemy) || (iob instanceof Emptiness))
+                    {
+                        destroyList.add(iob);
+                    }
+                }
+            }
+            else
+            {
+                --timeToSpawn;
+                if(timeToSpawn <= 0)
+                {
+                    spawnEnemy();
+                    timeToSpawn = spawnInterval;
+                    spawnInterval -= 1;
+                }
+            }
+        }
         player.update();
     }
 
@@ -64,6 +151,15 @@ public class Game implements iState
     {
         g.drawImage(Main.background, 0, 0, null);
         player.draw(g);
+    }
+
+    @Override
+    public void postDraw(Graphics2D g)
+    {
+        if(waveEnded)
+        {
+            destroyer.draw(g);
+        }
     }
 
     private void spawnEnemy()
@@ -93,18 +189,39 @@ public class Game implements iState
         int spawnX = (spawnLoc.x * GRID_SIZE) + GRID_SIZE/2;
         int spawnY = (spawnLoc.y * GRID_SIZE) + GRID_SIZE/2;
         control.attach(new Emptiness(spawnX, spawnY, GRID_SIZE, GRID_SIZE));
-        control.attach(new Basic(spawnX, spawnY));
+
+        Enemy newEnemy = null;
+        double spawnSeed = Math.random();
+        double spawnProb = WaveData.waveData[currentWave].spawnChance[0];
+        if(spawnSeed < spawnProb)
+            newEnemy = new Basic(spawnX, spawnY); // Enemy 0
+        else
+        {
+            spawnProb += WaveData.waveData[currentWave].spawnChance[1];
+            if(spawnSeed < spawnProb)
+                newEnemy = new Basic(spawnX, spawnY); // Enemy 1
+            else
+            {
+                spawnProb += WaveData.waveData[currentWave].spawnChance[2];
+                if(spawnSeed < spawnProb)
+                    newEnemy = new Basic(spawnX, spawnY); // Enemy 2
+                else
+                {
+                    spawnProb += WaveData.waveData[currentWave].spawnChance[3];
+                    if(spawnSeed < spawnProb)
+                        newEnemy = new Basic(spawnX, spawnY); // Enemy 3
+                    else
+                        newEnemy = new Basic(spawnX, spawnY); // Enemy 4
+                }
+            }
+        }
+
+        control.attach(newEnemy);
     }
 
     @Override
     public void mousePressed(int b)
     {
-        switch(b)
-        {
-            case(MouseEvent.BUTTON3):
-                spawnEnemy();
-                break;
-        }
         player.mousePressed(b);
     }
 

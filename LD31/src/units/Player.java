@@ -72,9 +72,18 @@ public class Player
         
         if(speed > 0)
         {
+            if(shoot)
+            {
+                speed -= 2*friction;
+            }
             x += Math.cos(direction)*speed;
             y += Math.sin(direction)*speed;
         }
+
+        if(x < 0) x = 0;
+        if(x > Canvas.hSize) x = Canvas.hSize;
+        if(y < 0) y = 0;
+        if(y > Canvas.vSize) y = Canvas.vSize;
         
         rotation = Math.atan2(Canvas.mouse_y-y,Canvas.mouse_x-x)+2;
         

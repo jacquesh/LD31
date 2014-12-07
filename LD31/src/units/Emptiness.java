@@ -1,15 +1,23 @@
 package units;
 
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+
+import util.Utility;
+import util.Sprite;
 
 import states.iObserver;
 
 public class Emptiness implements iObserver
 {
+    private static BufferedImage emptySprite = Utility.loadImage("/Resources/Images/Window/emptiness.png");
+
     private int x;
     private int y;
     private int w;
     private int h;
+
+    private Sprite spr;
 
     public Emptiness(int x, int y, int w, int h)
     {
@@ -17,6 +25,8 @@ public class Emptiness implements iObserver
         this.y = y - h/2;
         this.w = w;
         this.h = h;
+
+        spr = new Sprite(emptySprite, 0, 0);
     }
 
     public boolean update()
@@ -26,6 +36,6 @@ public class Emptiness implements iObserver
     
     public void draw(Graphics2D g)
     {
-        g.fillRect(x,y,w,h);
+        spr.draw(g, x, y);
     }
 }

@@ -15,7 +15,7 @@ import weapons.aWeapon;
 public class Player
 {
     public double x, y;
-    protected double direction, friction, speed, speedMax, health;
+    public double direction, friction, speed, speedMax, health;
     protected double rotation;
     protected boolean up, down, left, right, shoot;
     protected Sprite spr;

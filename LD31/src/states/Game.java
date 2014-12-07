@@ -37,7 +37,8 @@ public class Game implements iState
     private int waveEndTime;
     private boolean waveEnded;
 
-    private ArrayList<iObserver> destroyList;
+    private boolean gameOver;
+
     private Destroyer destroyer;
 
     private Font countdownFont;
@@ -49,18 +50,20 @@ public class Game implements iState
         player = new Player();
         control.player = player;
         spawnLocQueue = new PriorityQueue<GridPoint>(64);
-        destroyList = new ArrayList<iObserver>();
         destroyer = new Destroyer();
         currentWave = 0;
         countdownFont = Utility.loadFont("/Resources/Fonts/PowerGreen.ttf", Font.TRUETYPE_FONT, Font.PLAIN, 48);
         countdownBackground = new Color(0, 0, 0, 128);
 
+        gameOver = false;
         reset();
         player.reset();
     }
 
     private void reset()
     {
+        control.getObservers(iSubject.ObsTypes.ENEMY).clear();
+
         int xBlocks = Canvas.hSize/GRID_SIZE;
         int yBlocks = Canvas.vSize/GRID_SIZE;
 
@@ -97,30 +100,16 @@ public class Game implements iState
     @Override
     public void update()
     {
+        if(gameOver)
+            return;
+
         if(waveEnded)
         {
             destroyer.x += 180;
-            for(int i=destroyList.size()-1; i>=0; --i)
-            {
-                iObserver obs = destroyList.get(i);
-                if(obs instanceof Enemy)
-                {
-                    Enemy e = (Enemy)obs;
-                    if(e.x < destroyer.x)
-                        control.getObservers(iSubject.ObsTypes.ENEMY).remove(e);
-                }
-                else if(obs instanceof Emptiness)
-                {
-                    Emptiness e = (Emptiness)obs;
-                    if(e.x < destroyer.x)
-                        control.getObservers(iSubject.ObsTypes.ENEMY).remove(e);
-                }
-            }
 
             ++waveEndTime;
             if(waveEndTime > WAVE_END_LENGTH)
             {
-                control.getObservers(iSubject.ObsTypes.ENEMY).clear();
                 waveEnded = false;
                 waveEndTime = 0;
                 reset();
@@ -135,13 +124,6 @@ public class Game implements iState
                 waveTime = 0;
                 waveEnded = true;
                 Utility.playSound("/Resources/Sounds/destroy.wav");
-                for(iObserver iob : control.getObservers(iSubject.ObsTypes.ENEMY))
-                {
-                    if((iob instanceof Enemy) || (iob instanceof Emptiness))
-                    {
-                        destroyList.add(iob);
-                    }
-                }
             }
             else
             {
@@ -164,7 +146,7 @@ public class Game implements iState
             {
                 if(o_E instanceof Emptiness)
                     continue;
-                
+
                 Enemy e = (Enemy) o_E;
                 //Quick preliminary check
                 if(Math.abs(e.x - p.xPrev) < p.speed + e.size &&
@@ -197,8 +179,28 @@ public class Game implements iState
                 }
             }
         }
-        
+
+        for(iObserver o_E : control.getObservers(iSubject.ObsTypes.ENEMY))
+        {
+            if(o_E instanceof Emptiness)
+                continue;
+
+            Enemy e = (Enemy)o_E;
+            double dx = player.x - e.x;
+            double dy = player.y - e.y;
+            double dist = dx*dx + dy*dy;
+
+            if(dist < (e.size/2+16)*(e.size/2+16))
+            {
+                player.health -= 1;
+            }
+        }
         player.update();
+
+        if(player.health <= 0)
+        {
+            gameOver = true;
+        }
     }
 
     @Override
@@ -223,6 +225,17 @@ public class Game implements iState
         g.setColor(Color.white);
         g.setFont(countdownFont);
         g.drawString(String.format("%05.2f", timeLeft), Canvas.hSize/2 - 50, Canvas.vSize - 10);
+
+        if(gameOver)
+        {
+            g.setColor(countdownBackground);
+            g.fillRoundRect((Canvas.hSize/2)-260, (Canvas.vSize/2)-120, 500,230, 30,30);
+
+            g.setColor(Color.white);
+            g.drawString("Game Over", (Canvas.hSize/2) - 100, (Canvas.vSize/2) - 50);
+            g.drawString("Press <space> to restart", (Canvas.hSize/2) - 250, (Canvas.vSize/2) - 0);
+            g.drawString("Press <escape> to quit", (Canvas.hSize/2) - 220, (Canvas.vSize/2) + 50);
+        }
     }
 
     private void spawnEnemy()
@@ -298,6 +311,12 @@ public class Game implements iState
         {
             case(KeyEvent.VK_ESCAPE):
                 System.exit(0);
+                break;
+            case(KeyEvent.VK_SPACE):
+                System.out.println("RESTART");
+                gameOver = false;
+                currentWave = 0;
+                reset();
                 break;
         }
         player.keyPressed(k);

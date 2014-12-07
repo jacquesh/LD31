@@ -5,8 +5,15 @@ import java.awt.FontFormatException;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.IOException;
 import java.util.Properties;
 import javax.imageio.ImageIO;
+
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  * Functionality for loading various internal files in a static context, regardless of the compile
@@ -43,6 +50,31 @@ public class Utility
         return img;
     }
     
+    public static void playSound(String str)
+    {
+        try
+        {
+            Clip result = AudioSystem.getClip();
+            InputStream resource = path.getClass().getResourceAsStream(str);
+            AudioInputStream stream = AudioSystem.getAudioInputStream(resource);
+            
+            result.open(stream);
+            result.start();
+        }
+        catch(LineUnavailableException lue)
+        {
+            lue.printStackTrace();
+        }
+        catch(UnsupportedAudioFileException uafe)
+        {
+            uafe.printStackTrace();
+        }
+        catch(IOException ioe)
+        {
+            ioe.printStackTrace();
+        }
+    }
+
     /**
      * Create and load a font from a font file which was compiled in the game.
      * @param str File location, relative to source file.

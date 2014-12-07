@@ -18,6 +18,7 @@ import units.Emptiness;
 import units.Destroyer;
 
 import util.GridPoint;
+import util.Utility;
 
 public class Game implements iState
 {
@@ -124,9 +125,10 @@ public class Game implements iState
             ++waveTime;
             if(waveTime >= WAVE_LENGTH)
             {
-                currentWave = (currentWave < 4) ? currentWave+1 : currentWave; //Clamp to 4
+                currentWave = (currentWave < 9) ? currentWave+1 : currentWave; //Clamp to 9
                 waveTime = 0;
                 waveEnded = true;
+                Utility.playSound("/Resources/Sounds/destroy.wav");
                 for(iObserver iob : control.observers)
                 {
                     if((iob instanceof Enemy) || (iob instanceof Emptiness))
@@ -225,6 +227,10 @@ public class Game implements iState
     @Override
     public void mousePressed(int b)
     {
+        if(b == 1)
+        {
+            Utility.playSound("/Resources/Sounds/shot.wav");
+        }
         player.mousePressed(b);
     }
 

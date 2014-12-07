@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import units.Player;
+import units.Emptiness;
 
 public class Game implements iState
 {
@@ -32,13 +33,21 @@ public class Game implements iState
         player.draw(g);
     }
 
+    private void spawnEnemy()
+    {
+        int spawnX = (int)Canvas.mouse_x;
+        int spawnY = (int)Canvas.mouse_y;
+        control.attach(new Emptiness(spawnX, spawnY, 32, 32));
+        control.attach(new Basic(spawnX, spawnY));
+    }
+
     @Override
     public void mousePressed(int b)
     {
         switch(b)
         {
             case(MouseEvent.BUTTON3):
-                control.attach(new Basic(Canvas.mouse_x, Canvas.mouse_y));
+                spawnEnemy();
                 break;
         }
         player.mousePressed(b);

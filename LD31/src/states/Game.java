@@ -1,8 +1,5 @@
 package states;
 
-import core.Canvas;
-import core.Main;
-import enemies.Basic;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -16,6 +13,7 @@ import core.Main;
 import enemies.Enemy;
 import enemies.Basic;
 import enemies.Splitter;
+import enemies.Tank;
 import units.Player;
 import units.Emptiness;
 import units.Destroyer;
@@ -228,10 +226,10 @@ public class Game implements iState
             {
                 spawnProb += WaveData.waveData[currentWave].spawnChance[2];
                 if(spawnSeed < spawnProb)
-                    newEnemy = new Basic(spawnX, spawnY); // Enemy 2
+                    newEnemy = new Tank(spawnX, spawnY); // Enemy 2
                 else
                 {
-                    newEnemy = new Basic(spawnX, spawnY); // Enemy 3
+                    newEnemy = new Tank(spawnX, spawnY); // Enemy 3
                 }
             }
         }

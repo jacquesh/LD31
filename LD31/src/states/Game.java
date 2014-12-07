@@ -27,7 +27,7 @@ public class Game implements iState
 {
     public static final int GRID_SIZE = 32;
     public static final int WAVE_LENGTH = 30*20; //20 seconds
-    public static final int WAVE_END_LENGTH = 30*3; //3 seconds
+    public static final int WAVE_END_LENGTH = 6;
 
     Player player;
 
@@ -120,9 +120,11 @@ public class Game implements iState
                         control.getObservers(iSubject.ObsTypes.ENEMY).remove(e);
                 }
             }
+
             ++waveEndTime;
             if(waveEndTime > WAVE_END_LENGTH)
             {
+                control.getObservers(iSubject.ObsTypes.ENEMY).clear();
                 waveEnded = false;
                 waveEndTime = 0;
                 reset();

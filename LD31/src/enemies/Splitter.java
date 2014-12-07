@@ -1,6 +1,7 @@
 package enemies;
 
 import states.eControl;
+import states.iSubject;
 
 public class Splitter extends Enemy
 {
@@ -44,7 +45,7 @@ public class Splitter extends Enemy
                 for(int i=0; i<4; i++)
                 {
                     Enemy e = new Splitlett(x, y);
-                    eControl.INSTANCE.attach(e);
+                    eControl.INSTANCE.attach(e, iSubject.ObsTypes.ENEMY);
                     e.direction = i*0.5*Math.PI + rotation;
                     switch(i)
                     {

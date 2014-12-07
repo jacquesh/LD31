@@ -6,7 +6,7 @@ import util.Sprite;
 
 public abstract class aProjectile implements iObserver
 {
-    double x, y, direction, speed, distance, damage;
+    double x, y, xPrev, yPrev, direction, speed, distance, damage;
     Sprite spr;
     
     public aProjectile(double x, double y, double dir)
@@ -19,6 +19,8 @@ public abstract class aProjectile implements iObserver
     @Override
     public boolean update()
     {
+        xPrev = x;
+        yPrev = y;
         x += Math.cos(direction)*speed;
         y += Math.sin(direction)*speed;
         

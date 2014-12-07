@@ -1,26 +1,20 @@
 package enemies;
 
-import core.Main;
 import states.eControl;
-import util.Sprite;
 
 public class Splitlett extends Enemy
 {
 
     public Splitlett(double x, double y)
     {
-        this(x, y, (int)x, (int)y);
-    }
-
-    public Splitlett(double x, double y, int spawnX, int spawnY)
-    {
-        super(x, y, spawnX, spawnY);
+        super(x, y);
         
         speedMax = 10;
         health = 1;
         rotationSpeed = (Math.random()-0.5)/1.8;
-        spr = new Sprite(Main.background.getSubimage(spawnX-8+2,spawnY-8+2, 12, 12), 6, 6);
         fade = 0;
+        
+        border = border16;
     }
     
     @Override

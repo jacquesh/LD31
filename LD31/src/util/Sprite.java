@@ -6,14 +6,19 @@ import java.awt.image.BufferedImage;
 
 public class Sprite
 {
-    public BufferedImage image;
-    public double offset_x, offset_y;
+    protected BufferedImage image;
+    protected double offset_x, offset_y;
     
     public Sprite(BufferedImage image, double offset_x, double offset_y)
     {
         this.image = image;
         this.offset_x = offset_x;
         this.offset_y = offset_y;
+    }
+    
+    public BufferedImage getImage()
+    {
+        return image;
     }
     
     public void draw(Graphics2D g, double x, double y)

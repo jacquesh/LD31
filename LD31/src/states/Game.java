@@ -1,16 +1,14 @@
 package states;
 
-import java.awt.Graphics2D;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-
-import java.util.PriorityQueue;
-
 import core.Canvas;
 import core.Main;
 import enemies.Basic;
-import units.Player;
+import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.util.PriorityQueue;
 import units.Emptiness;
+import units.Player;
 import util.GridPoint;
 
 public class Game implements iState
@@ -131,5 +129,4 @@ public class Game implements iState
     {
         player.keyReleased(k);
     }
-    
 }

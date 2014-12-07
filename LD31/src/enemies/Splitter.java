@@ -29,7 +29,7 @@ public class Splitter extends Enemy
             if(timer > 0)
             {
                 timer--;
-                speed -= 0.08;
+                speed -= 0.2;
                 if(rotationSpeed < 0)
                 {
                     rotationSpeed -= 0.005;

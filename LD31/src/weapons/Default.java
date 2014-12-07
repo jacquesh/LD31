@@ -1,5 +1,6 @@
 package weapons;
 
+import java.awt.Graphics2D;
 import projectiles.BrokenFinger;
 import states.eControl;
 import states.iSubject;
@@ -12,9 +13,9 @@ public class Default extends aWeapon
     {
         super(x, y, dir);
         
-        reload_time = 40;
-        delay_time = 10;
-        clip_val = clip_max = 10;
+        reload_time = 4;
+        delay_time = 0;
+        clip_val = clip_max = 1;
         ammo = -1;
         
         rotation = 2;
@@ -39,4 +40,7 @@ public class Default extends aWeapon
             Utility.playSound("/Resources/Sounds/shot.wav");
         }
     }
+    
+    @Override
+    public void draw(Graphics2D g) {}
 }

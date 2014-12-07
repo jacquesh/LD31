@@ -11,7 +11,7 @@ public class BrokenFinger extends aProjectile
         
         speed = 40;
         distance = 1000;
-        damage = 1;
+        damage = 2;
         
         spr = new Sprite(Utility.loadImage("/Resources/Images/Projectiles/brokenFinger.png"), 8, 3.5);
     }

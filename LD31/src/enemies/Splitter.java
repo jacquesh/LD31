@@ -26,6 +26,11 @@ public class Splitter extends Enemy
     {
         direction = Math.atan2(eControl.INSTANCE.player.y-y, eControl.INSTANCE.player.x-x);
 
+        if(speed == 0)
+        {
+            rotation += rotationSpeed;
+        }
+        
         if(fade == 0)
         {
             if(timer > 0)

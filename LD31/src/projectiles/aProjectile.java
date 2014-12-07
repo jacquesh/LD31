@@ -6,8 +6,10 @@ import util.Sprite;
 
 public abstract class aProjectile implements iObserver
 {
-    double x, y, xPrev, yPrev, direction, speed, distance, damage;
-    Sprite spr;
+    public double x, y, xPrev, yPrev, speed;
+    protected double direction, distance, damage;
+    protected Sprite spr;
+    public boolean flag = false;
     
     public aProjectile(double x, double y, double dir)
     {
@@ -26,8 +28,9 @@ public abstract class aProjectile implements iObserver
         
         distance -= speed;
         if(distance <= 0)
-            return true;
-        return false;
+            flag = true;
+        
+        return flag;
     }
     
     @Override

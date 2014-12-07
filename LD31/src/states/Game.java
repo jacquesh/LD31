@@ -24,7 +24,7 @@ import util.Utility;
 public class Game implements iState
 {
     public static final int GRID_SIZE = 32;
-    public static final int WAVE_LENGTH = 30*20; //20 seconds
+    public static final int WAVE_LENGTH = 30*40; //40 seconds
     public static final int WAVE_END_LENGTH = 6;
 
     Player player;
@@ -89,7 +89,7 @@ public class Game implements iState
 
         destroyer.x = -64;
 
-        spawnInterval = 30;
+        spawnInterval = 45;
         waveTime = 0;
         waveEndTime = 0;
         waveEnded = false;
@@ -101,7 +101,7 @@ public class Game implements iState
     {
         if(waveEnded)
         {
-            destroyer.x += 200;
+            destroyer.x += 180;
             for(int i=destroyList.size()-1; i>=0; --i)
             {
                 iObserver obs = destroyList.get(i);

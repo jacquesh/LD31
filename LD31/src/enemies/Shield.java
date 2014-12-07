@@ -19,6 +19,7 @@ public class Shield extends Enemy
 
         speedMax = 5;
         health = 5;
+        size = 32;
         rotationSpeed = (Math.random()-0.5)/4;
         fade = 0;
 

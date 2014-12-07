@@ -13,6 +13,7 @@ public class Tank extends Enemy
 
         speedMax = 4;
         health = 8;
+        size = 32;
         rotationSpeed = (Math.random()-0.5)/2;
         
         makeImage((int)x, (int)y, 32);

@@ -9,7 +9,7 @@ public class Splitlett extends Enemy
     {
         super(x, y);
         
-        speedMax = 10;
+        speedMax = 8;
         health = 1;
         rotationSpeed = (Math.random()-0.5)/1.8;
         fade = 0;

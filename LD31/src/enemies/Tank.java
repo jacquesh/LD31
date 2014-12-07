@@ -11,7 +11,7 @@ public class Tank extends Enemy
     {
         super(x, y);
 
-        speedMax = 4;
+        speedMax = 2;
         health = 8;
         size = 32;
         rotationSpeed = (Math.random()-0.5)/2;

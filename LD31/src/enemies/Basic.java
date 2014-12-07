@@ -12,7 +12,7 @@ public class Basic extends Enemy
     {
         super(x, y);
 
-        speedMax = 5;
+        speedMax = 3;
         health = 4;
         rotationSpeed = (Math.random()-0.5)/2;
         size = 32;
@@ -38,7 +38,7 @@ public class Basic extends Enemy
                 if(timer > 0)
                 {
                     timer--;
-                    speed -= 0.04;
+                    speed -= 0.02;
                     if(rotationSpeed < 0)
                     {
                         rotationSpeed -= 0.005;

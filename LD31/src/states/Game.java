@@ -173,7 +173,7 @@ public class Game implements iState
 
                         if((t1 >= 0 && t1 <= 1) || (t2 >= 0 && t2 <= 1))
                         {
-                            e.health -= 1;
+                            e.health -= p.damage;
                             p.flag = true;
                         }
                     }

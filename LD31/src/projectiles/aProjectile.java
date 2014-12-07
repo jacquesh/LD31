@@ -6,8 +6,8 @@ import util.Sprite;
 
 public abstract class aProjectile implements iObserver
 {
-    public double x, y, xPrev, yPrev, speed;
-    protected double direction, distance, damage;
+    public double x, y, xPrev, yPrev, speed, damage;
+    protected double direction, distance;
     protected Sprite spr;
     public boolean flag = false;
     

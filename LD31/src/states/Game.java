@@ -95,6 +95,7 @@ public class Game implements iState
         waveEndTime = 0;
         waveEnded = false;
         timeToSpawn = spawnInterval;
+        player.reset();
     }
 
     @Override
@@ -193,6 +194,7 @@ public class Game implements iState
             if(dist < (e.size/2+16)*(e.size/2+16))
             {
                 player.health -= 1;
+                Utility.playSound("/Resources/Sounds/hit.wav");
             }
         }
         player.update();
@@ -313,7 +315,6 @@ public class Game implements iState
                 System.exit(0);
                 break;
             case(KeyEvent.VK_SPACE):
-                System.out.println("RESTART");
                 gameOver = false;
                 currentWave = 0;
                 reset();

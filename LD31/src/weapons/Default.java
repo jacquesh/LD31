@@ -2,6 +2,7 @@ package weapons;
 
 import projectiles.BrokenFinger;
 import states.eControl;
+import states.iSubject;
 import util.Sprite;
 import util.Utility;
 
@@ -34,7 +35,7 @@ public class Default extends aWeapon
                 reload_val = reload_time;
             }
             
-            eControl.INSTANCE.attach(new BrokenFinger(x, y, direction));
+            eControl.INSTANCE.attach(new BrokenFinger(x, y, direction), iSubject.ObsTypes.PROJECTILE);
         }
     }
 }

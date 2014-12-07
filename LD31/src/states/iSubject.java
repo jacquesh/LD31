@@ -7,17 +7,24 @@ import java.awt.Graphics2D;
  */
 public interface iSubject
 {
+    enum ObsTypes
+    {
+        GENERAL,
+        PROJECTILE,
+        ENEMY;
+    }
+    
     /**
      * Add an observer to the list.
      * @param o Observer.
      */
-    public void attach(iObserver o);
+    public void attach(iObserver o, ObsTypes t);
     
     /**
      * Remove an observer from the list at the given index.
      * @param index Observer index in the list.
      */
-    public void detach(int index);
+    public void detach(int index, ObsTypes t);
     
     /**
      * Notify all observers that they must be updated.

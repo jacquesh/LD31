@@ -73,7 +73,6 @@ public abstract class Enemy implements iObserver
     
     public void makeImage(int x, int y, int size)
     {
-        image = Main.background.getSubimage(x-size/2, y-size/2, size, size);
         switch(size)
         {
             case(8): border = border08; break;
@@ -83,7 +82,14 @@ public abstract class Enemy implements iObserver
             default: border = border64; break;
 
         }
-        makeBorder(size);
+        
+        image = new BufferedImage(size, size, BufferedImage.TYPE_INT_RGB);
+        Graphics2D image_g = (Graphics2D)image.getGraphics();
+        
+        image_g.drawImage(Main.background.getSubimage(x-size/2, y-size/2, size, size), 0, 0, null);
+        image_g.drawImage(border, 0, 0, null);
+        image_g.dispose();
+        spr = new Sprite(image, size/2, size/2);
     }
     
     public void makeBorder(int size)

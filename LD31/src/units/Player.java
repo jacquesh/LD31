@@ -6,6 +6,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import util.Sprite;
 import util.Utility;
+import weapons.Default;
+import weapons.aWeapon;
 
 /**
  * Keeps track of various stocks for the player, in particular its weapons and ammo.
@@ -17,6 +19,7 @@ public class Player
     protected double rotation;
     protected boolean up, down, left, right, shoot;
     protected Sprite spr;
+    protected aWeapon weaponBase, weapon;
     
     public Player()
     {
@@ -35,6 +38,9 @@ public class Player
         shoot = false;
         
         spr = new Sprite(Utility.loadImage("/Resources/Images/Units/player.png"), 9, 19);
+        
+        weaponBase = new Default(x, y, direction);
+        weapon = weaponBase;
     }
     
     public void update()
@@ -67,15 +73,18 @@ public class Player
         
         rotation = Math.atan2(Canvas.mouse_y-y,Canvas.mouse_x-x)+2;
         
+        weapon.update();
+        weapon.setLocation(x, y, rotation-2);
         if(shoot)
         {
-            //TODO
+            weapon.shoot();
         }
     }
     
     public void draw(Graphics2D g)
     {
         spr.draw(g, x, y, rotation);
+        weapon.draw(g);
     }
     
     /**

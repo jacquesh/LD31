@@ -90,8 +90,8 @@ public class Game implements iState
 
         int spawnX = (spawnLoc.x * GRID_SIZE) + GRID_SIZE/2;
         int spawnY = (spawnLoc.y * GRID_SIZE) + GRID_SIZE/2;
-        control.attach(new Emptiness(spawnX, spawnY, GRID_SIZE, GRID_SIZE));
-        control.attach(new Basic(spawnX, spawnY));
+        control.attach(new Emptiness(spawnX, spawnY, GRID_SIZE, GRID_SIZE), iSubject.ObsTypes.GENERAL);
+        control.attach(new Basic(spawnX, spawnY), iSubject.ObsTypes.ENEMY);
     }
 
     @Override

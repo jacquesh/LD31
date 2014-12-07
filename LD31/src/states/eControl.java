@@ -17,6 +17,9 @@ public enum eControl implements iSubject
     
     private States currentState;
     private ArrayList<iObserver> observers = new ArrayList<>();
+    private ArrayList<iObserver> obs_Proj  = new ArrayList<>();
+    private ArrayList<iObserver> obs_Enemy = new ArrayList<>();
+    
     public Player player = null;
 
     /**
@@ -36,6 +39,17 @@ public enum eControl implements iSubject
         private States(iState s)
         {
             state = s;
+        }
+    }
+    
+    public ArrayList<iObserver> getObservers(ObsTypes t)
+    {
+        switch(t)
+        {
+            case GENERAL:       return observers;
+            case PROJECTILE:    return obs_Proj;
+            case ENEMY:         return obs_Enemy;
+            default:            return null;
         }
     }
     
@@ -115,29 +129,69 @@ public enum eControl implements iSubject
     }
     
     @Override
-    public void attach(iObserver o)
+    public void attach(iObserver o, ObsTypes t)
     {
-        observers.add(o);
+        switch(t)
+        {
+            case GENERAL:
+                observers.add(o);
+                break;
+                
+            case PROJECTILE:
+                obs_Proj.add(o);
+                break;
+                
+            case ENEMY:
+                obs_Enemy.add(o);
+                break;
+        }
     }
 
     @Override
-    public void detach(int index)
+    public void detach(int index, ObsTypes t)
     {
-        observers.remove(index);
+        switch(t)
+        {
+            case GENERAL:
+                observers.remove(index);
+                break;
+                
+            case PROJECTILE:
+                obs_Proj.remove(index);
+                break;
+                
+            case ENEMY:
+                obs_Enemy.remove(index);
+                break;
+        }
     }
 
     @Override
     public void notifyUpdate()
     {
-        int size = observers.size();
-        for(int i=0; i<size; i++)
+        for(int i=0; i<observers.size(); i++)
         {
-            //update observer
             if(observers.get(i).update())
             {
-                //remove if necessary
-                detach(i);
-                size--;
+                detach(i, ObsTypes.GENERAL);
+                i--;
+            }
+        }
+        
+        for(int i=0; i<obs_Proj.size(); i++)
+        {
+            if(obs_Proj.get(i).update())
+            {
+                detach(i, ObsTypes.PROJECTILE);
+                i--;
+            }
+        }
+        
+        for(int i=0; i<obs_Enemy.size(); i++)
+        {
+            if(obs_Enemy.get(i).update())
+            {
+                detach(i, ObsTypes.ENEMY);
                 i--;
             }
         }
@@ -147,6 +201,16 @@ public enum eControl implements iSubject
     public void notifyDraw(Graphics2D g)
     {
         for(iObserver o : observers)
+        {
+            o.draw(g);
+        }
+        
+        for(iObserver o : obs_Proj)
+        {
+            o.draw(g);
+        }
+        
+        for(iObserver o : obs_Enemy)
         {
             o.draw(g);
         }

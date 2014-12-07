@@ -25,6 +25,12 @@ public interface iState
      * @param g Graphics element to draw on.
      */
     public abstract void draw(Graphics2D g);
+
+    /**
+     * Per frame drawing that happens after all other draws (IE after all attached observers have been drawn)
+     * @param g Graphics element to draw on.
+     */
+    public abstract void postDraw(Graphics2D g);
     
     /**
      * On mouse press events, often this will need to be passed to other objects.

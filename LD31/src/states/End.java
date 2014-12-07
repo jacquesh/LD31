@@ -30,6 +30,12 @@ public class End implements iState
     }
     
     @Override
+    public void postDraw(Graphics2D g)
+    {
+        
+    }
+
+    @Override
     public void keyPressed(int k)
     {
         switch(k)

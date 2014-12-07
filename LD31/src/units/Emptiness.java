@@ -12,10 +12,10 @@ public class Emptiness implements iObserver
 {
     private static BufferedImage emptySprite = Utility.loadImage("/Resources/Images/Window/emptiness.png");
 
-    private int x;
-    private int y;
-    private int w;
-    private int h;
+    public int x;
+    public int y;
+    public int w;
+    public int h;
 
     private Sprite spr;
 

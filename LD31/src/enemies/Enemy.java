@@ -14,7 +14,7 @@ public abstract class Enemy implements iObserver
     protected static final BufferedImage border16 = Utility.loadImage("/Resources/Images/Enemies/enemyBorder16.png");
     protected static final BufferedImage border08 = Utility.loadImage("/Resources/Images/Enemies/enemyBorder08.png");
 
-    protected double x, y, direction, speed, speedMax, health;
+    public double x, y, direction, speed, speedMax, health;
     protected double rotation, rotationSpeed, fade;
     protected BufferedImage image, border;
     protected Sprite spr;

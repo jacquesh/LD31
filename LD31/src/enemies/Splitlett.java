@@ -3,7 +3,6 @@ package enemies;
 import core.Main;
 import states.eControl;
 import util.Sprite;
-import util.Utility;
 
 public class Splitlett extends Enemy
 {
@@ -20,7 +19,6 @@ public class Splitlett extends Enemy
         speedMax = 10;
         health = 1;
         rotationSpeed = (Math.random()-0.5)/1.8;
-        //spr = new Sprite(Utility.loadImage("/Resources/Images/Enemies/enemyBase16.png"), 7.5, 7.5);
         spr = new Sprite(Main.background.getSubimage(spawnX-8+2,spawnY-8+2, 12, 12), 6, 6);
         fade = 0;
     }

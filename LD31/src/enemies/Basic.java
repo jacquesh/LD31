@@ -3,7 +3,6 @@ package enemies;
 import core.Main;
 import states.eControl;
 import util.Sprite;
-import util.Utility;
 
 public class Basic extends Enemy
 {
@@ -43,6 +42,15 @@ public class Basic extends Enemy
                 if(timer > 0)
                 {
                     timer--;
+                    speed -= 0.04;
+                    if(rotationSpeed < 0)
+                    {
+                        rotationSpeed -= 0.005;
+                    }
+                    else
+                    {
+                        rotationSpeed += 0.005;
+                    }
                 }
                 else
                 {
@@ -50,7 +58,7 @@ public class Basic extends Enemy
                     {
                         Enemy e = new Splitlett(x, y, spawnX, spawnY);
                         eControl.INSTANCE.attach(e);
-                        e.direction = (i*0.5*Math.PI + rotation)%(2*Math.PI);
+                        e.direction = i*0.5*Math.PI + rotation;
                     }
                     return true;
                 }

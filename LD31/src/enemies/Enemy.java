@@ -1,15 +1,16 @@
 package enemies;
 
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import states.iObserver;
 import util.Sprite;
 import util.Utility;
 
 public abstract class Enemy implements iObserver
 {
-    private static Sprite highlight64;
-    private static Sprite highlight32;
-    private static Sprite highlight16;
+    protected static final BufferedImage highlight64 = Utility.loadImage("/Resources/Images/Enemies/enemyBorder64.png");
+    protected static final BufferedImage highlight32 = Utility.loadImage("/Resources/Images/Enemies/enemyBorder64.png");
+    protected static final BufferedImage highlight16 = Utility.loadImage("/Resources/Images/Enemies/enemyBorder64.png");
 
     protected double x, y, direction, speed, speedMax, health;
     protected double rotation, rotationSpeed, fade;
@@ -17,13 +18,6 @@ public abstract class Enemy implements iObserver
 
     protected int spawnX;
     protected int spawnY;
-    
-    static
-    {
-        highlight64 = new Sprite(Utility.loadImage("/Resources/Images/Enemies/enemyBorder64.png"), 32, 32);
-        highlight32 = new Sprite(Utility.loadImage("/Resources/Images/Enemies/enemyBorder32.png"), 16, 16);
-        highlight16 = new Sprite(Utility.loadImage("/Resources/Images/Enemies/enemyBorder16.png"), 8, 8);
-    }
 
     public Enemy(double x, double y)
     {
@@ -45,27 +39,29 @@ public abstract class Enemy implements iObserver
     @Override
     public boolean update()
     {
-        if(fade == 0)
+        if(speed <= 0)
         {
-            speed = speedMax;
-            rotation += rotationSpeed;
+            if(fade == 0)
+            {
+                speed = speedMax;
+            }
+            else
+            {
+                fade--;
+            }
         }
         else
         {
-            fade--;
-        }
-        
-        while(direction < 0)
-        {
-            direction += 2*Math.PI;
-        }
-        while(direction > 2*Math.PI)
-        {
-            direction -= 2*Math.PI;
-        }
-        
-        if(speed > 0)
-        {
+            rotation += rotationSpeed;
+            while(direction < 0)
+            {
+                direction += 2*Math.PI;
+            }
+            while(direction > 2*Math.PI)
+            {
+                direction -= 2*Math.PI;
+            }
+            
             x += Math.cos(direction)*speed;
             y += Math.sin(direction)*speed;
         }
@@ -78,19 +74,6 @@ public abstract class Enemy implements iObserver
     @Override
     public void draw(Graphics2D g)
     {
-        int w = spr.image.getWidth();
-        if(w == 60)
-        {
-            highlight64.draw(g,x,y,rotation);
-        }
-        else if(w == 28)
-        {
-            highlight32.draw(g,x,y,rotation);
-        }
-        else if(w == 12)
-        {
-            highlight16.draw(g,x,y,rotation);
-        }
         spr.draw(g, x, y, rotation);
     }
 }

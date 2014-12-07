@@ -4,6 +4,10 @@ import core.Canvas;
 import core.Main;
 import enemies.Basic;
 import enemies.Enemy;
+import enemies.Splitter;
+import enemies.Tank;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -19,7 +23,7 @@ public class Game implements iState
 {
     public static final int GRID_SIZE = 32;
     public static final int WAVE_LENGTH = 30*20; //20 seconds
-    public static final int WAVE_END_LENGTH = 30*3; //3 seconds
+    public static final int WAVE_END_LENGTH = 6;
 
     Player player;
 
@@ -36,6 +40,9 @@ public class Game implements iState
     private ArrayList<iObserver> destroyList;
     private Destroyer destroyer;
 
+    private Font countdownFont;
+    private Color countdownBackground;
+
     @Override
     public void init()
     {
@@ -45,6 +52,8 @@ public class Game implements iState
         destroyList = new ArrayList<iObserver>();
         destroyer = new Destroyer();
         currentWave = 0;
+        countdownFont = Utility.loadFont("/Resources/Fonts/PowerGreen.ttf", Font.TRUETYPE_FONT, Font.PLAIN, 48);
+        countdownBackground = new Color(0, 0, 0, 128);
 
         reset();
         player.reset();
@@ -107,9 +116,11 @@ public class Game implements iState
                         control.getObservers(iSubject.ObsTypes.ENEMY).remove(e);
                 }
             }
+
             ++waveEndTime;
             if(waveEndTime > WAVE_END_LENGTH)
             {
+                control.getObservers(iSubject.ObsTypes.ENEMY).clear();
                 waveEnded = false;
                 waveEndTime = 0;
                 reset();
@@ -201,6 +212,14 @@ public class Game implements iState
         {
             destroyer.draw(g);
         }
+
+        g.setColor(countdownBackground);
+        g.fillRoundRect((Canvas.hSize/2)-60, Canvas.vSize-52, 120,50, 30,30);
+
+        double timeLeft = (WAVE_LENGTH - waveTime)/30.0;
+        g.setColor(Color.white);
+        g.setFont(countdownFont);
+        g.drawString(String.format("%05.2f", timeLeft), Canvas.hSize/2 - 50, Canvas.vSize - 10);
     }
 
     private void spawnEnemy()
@@ -241,19 +260,15 @@ public class Game implements iState
         {
             spawnProb += WaveData.waveData[currentWave].spawnChance[1];
             if(spawnSeed < spawnProb)
-                newEnemy = new Basic(spawnX, spawnY); // Enemy 1
+                newEnemy = new Splitter(spawnX, spawnY); // Enemy 1
             else
             {
                 spawnProb += WaveData.waveData[currentWave].spawnChance[2];
                 if(spawnSeed < spawnProb)
-                    newEnemy = new Basic(spawnX, spawnY); // Enemy 2
+                    newEnemy = new Tank(spawnX, spawnY); // Enemy 2
                 else
                 {
-                    spawnProb += WaveData.waveData[currentWave].spawnChance[3];
-                    if(spawnSeed < spawnProb)
-                        newEnemy = new Basic(spawnX, spawnY); // Enemy 3
-                    else
-                        newEnemy = new Basic(spawnX, spawnY); // Enemy 4
+                    newEnemy = new Tank(spawnX, spawnY); // Enemy 3
                 }
             }
         }
@@ -264,10 +279,6 @@ public class Game implements iState
     @Override
     public void mousePressed(int b)
     {
-        if(b == 1)
-        {
-            Utility.playSound("/Resources/Sounds/shot.wav");
-        }
         player.mousePressed(b);
     }
 

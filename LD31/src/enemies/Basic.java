@@ -15,6 +15,7 @@ public class Basic extends Enemy
         speedMax = 5;
         health = 4;
         rotationSpeed = (Math.random()-0.5)/2;
+        size = 32;
         
         makeImage((int)x, (int)y, 32);
         

@@ -28,8 +28,7 @@ public enum eControl implements iSubject
      */
     public enum States
     {
-        GAME(new Game()),
-        END(new End());
+        GAME(new Game());
         
         public iState state;
         

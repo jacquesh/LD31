@@ -14,6 +14,7 @@ public class Splitter extends Enemy
         speedMax = 14;
         health = 100;
         rotationSpeed = (Math.random()-0.5)/1.8;
+        size = 32;
         
         makeImage((int)x, (int)y, 32);
         

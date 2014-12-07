@@ -13,6 +13,7 @@ public class Splitlett extends Enemy
         health = 1;
         rotationSpeed = (Math.random()-0.5)/1.8;
         fade = 0;
+        size = 16;
         
         border = border16;
     }

@@ -1,23 +1,21 @@
 package states;
 
+import core.Canvas;
+import core.Main;
+import enemies.Basic;
+import enemies.Enemy;
+import enemies.Splitter;
+import enemies.Tank;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.util.PriorityQueue;
 import java.util.ArrayList;
-
-import core.Canvas;
-import core.Main;
-import enemies.Enemy;
-import enemies.Basic;
-import enemies.Splitter;
-import enemies.Tank;
-import units.Player;
-import units.Emptiness;
+import java.util.PriorityQueue;
+import projectiles.aProjectile;
 import units.Destroyer;
-
+import units.Emptiness;
+import units.Player;
 import util.GridPoint;
 import util.Utility;
 
@@ -156,6 +154,47 @@ public class Game implements iState
                 }
             }
         }
+        
+        //Check the bullet collisions
+        for(iObserver o_P : control.getObservers(iSubject.ObsTypes.PROJECTILE))
+        {
+            
+            aProjectile p = (aProjectile) o_P;
+            for(iObserver o_E : control.getObservers(iSubject.ObsTypes.ENEMY))
+            {
+                Enemy e = (Enemy) o_E;
+                //Quick preliminary check
+                if(Math.abs(e.x - p.xPrev) < p.speed + e.size &&
+                        Math.abs(e.y - p.yPrev ) < p.speed + e.size)
+                { //Found math here: http://stackoverflow.com/questions/1073336/circle-line-segment-collision-detection-algorithm
+                    double dx = p.x - p.xPrev;
+                    double dy = p.y - p.yPrev;
+                    double fx = p.x - e.x;
+                    double fy = p.y - e.y;
+                    
+                    double a = dx*dx + dy*dy;
+                    double b = 2*(dx*fx + dy*fy);
+                    double c = fx*fx + fy*fy  - e.size*e.size ;
+
+                    double discriminant = b*b - 4*a*c;
+
+                    if(discriminant >= 0)
+                    {
+                        discriminant = Math.sqrt( discriminant );
+
+                        double t1 = (-b - discriminant)/(2*a);
+                        double t2 = (-b + discriminant)/(2*a);
+
+                        if((t1 >= 0 && t1 <= 1) || (t2 >= 0 && t2 <= 1))
+                        {
+                            e.health -= 1;
+                            p.flag = true;
+                        }
+                    }
+                }
+            }
+        }
+        
         player.update();
     }
 
@@ -210,7 +249,7 @@ public class Game implements iState
         int spawnX = (spawnLoc.x * GRID_SIZE) + GRID_SIZE/2;
         int spawnY = (spawnLoc.y * GRID_SIZE) + GRID_SIZE/2;
 
-        control.attach(new Emptiness(spawnX, spawnY, GRID_SIZE, GRID_SIZE), iSubject.ObsTypes.ENEMY);
+        control.attach(new Emptiness(spawnX, spawnY, GRID_SIZE, GRID_SIZE), iSubject.ObsTypes.GENERAL);
 
         Enemy newEnemy = null;
         double spawnSeed = Math.random();

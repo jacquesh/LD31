@@ -109,7 +109,7 @@ public class Game implements iState
                 {
                     Emptiness e = (Emptiness)obs;
                     if(e.x < destroyer.x)
-                        control.getObservers(iSubject.ObsTypes.GENERAL).remove(e);
+                        control.getObservers(iSubject.ObsTypes.ENEMY).remove(e);
                 }
             }
             ++waveEndTime;

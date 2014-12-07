@@ -1,8 +1,6 @@
 package enemies;
 
 import states.eControl;
-import util.Sprite;
-import util.Utility;
 
 public class Splitter extends Enemy
 {
@@ -15,7 +13,8 @@ public class Splitter extends Enemy
         speedMax = 14;
         health = 100;
         rotationSpeed = (Math.random()-0.5)/1.8;
-        spr = new Sprite(Utility.loadImage("/Resources/Images/Enemies/enemyBase32.png"), 15.5, 15.5);
+        
+        makeImage((int)x, (int)y, 32);
         
         timer = 45;
     }
@@ -46,7 +45,16 @@ public class Splitter extends Enemy
                 {
                     Enemy e = new Splitlett(x, y);
                     eControl.INSTANCE.attach(e);
-                    e.direction = (i*0.5*Math.PI + rotation)%(2*Math.PI);
+                    e.direction = i*0.5*Math.PI + rotation;
+                    switch(i)
+                    {
+                        case(0): e.image = image.getSubimage( 0,  0, 16, 16); break;
+                        case(1): e.image = image.getSubimage(16,  0, 16, 16); break;
+                        case(2): e.image = image.getSubimage(16, 16, 16, 16); break;
+                        case(3): e.image = image.getSubimage( 0, 16, 16, 16); break;
+                        default: e.image = image.getSubimage( 8,  8, 16, 16); break; //Middle in case
+                    }
+                    e.makeBorder(16);
                 }
                 return true;
             }

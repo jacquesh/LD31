@@ -1,5 +1,6 @@
 package enemies;
 
+import core.Main;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import states.iObserver;
@@ -8,28 +9,21 @@ import util.Utility;
 
 public abstract class Enemy implements iObserver
 {
-    protected static final BufferedImage highlight64 = Utility.loadImage("/Resources/Images/Enemies/enemyBorder64.png");
-    protected static final BufferedImage highlight32 = Utility.loadImage("/Resources/Images/Enemies/enemyBorder64.png");
-    protected static final BufferedImage highlight16 = Utility.loadImage("/Resources/Images/Enemies/enemyBorder64.png");
+    protected static final BufferedImage border64 = Utility.loadImage("/Resources/Images/Enemies/enemyBorder64.png");
+    protected static final BufferedImage border32 = Utility.loadImage("/Resources/Images/Enemies/enemyBorder32.png");
+    protected static final BufferedImage border16 = Utility.loadImage("/Resources/Images/Enemies/enemyBorder16.png");
+    protected static final BufferedImage border08 = Utility.loadImage("/Resources/Images/Enemies/enemyBorder08.png");
 
     protected double x, y, direction, speed, speedMax, health;
     protected double rotation, rotationSpeed, fade;
+    protected BufferedImage image, border;
     protected Sprite spr;
-
-    protected int spawnX;
-    protected int spawnY;
 
     public Enemy(double x, double y)
     {
-        this(x, y, (int)x, (int)y);
-    }
-
-    public Enemy(double x, double y, int spawnX, int spawnY)
-    {
         this.x = x;
         this.y = y;
-        this.spawnX = spawnX;
-        this.spawnY = spawnY;
+        
         direction = 0;
         speed = 0;
         fade = 60;
@@ -75,5 +69,28 @@ public abstract class Enemy implements iObserver
     public void draw(Graphics2D g)
     {
         spr.draw(g, x, y, rotation);
+    }
+    
+    public void makeImage(int x, int y, int size)
+    {
+        image = Main.background.getSubimage(x-size/2, y-size/2, size, size);
+        switch(size)
+        {
+            case(8): border = border08; break;
+            case(16): border = border16; break;
+            case(32): border = border32; break;
+            case(64): border = border64; break;
+            default: border = border64; break;
+
+        }
+        makeBorder(size);
+    }
+    
+    public void makeBorder(int size)
+    {
+        Graphics2D image_g = (Graphics2D)image.getGraphics();
+        image_g.drawImage(border, 0, 0, null);
+        image_g.dispose();
+        spr = new Sprite(image, size/2, size/2);
     }
 }

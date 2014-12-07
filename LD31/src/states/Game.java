@@ -243,10 +243,6 @@ public class Game implements iState
     @Override
     public void mousePressed(int b)
     {
-        if(b == 1)
-        {
-            Utility.playSound("/Resources/Sounds/shot.wav");
-        }
         player.mousePressed(b);
     }
 

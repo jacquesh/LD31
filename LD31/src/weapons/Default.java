@@ -36,6 +36,7 @@ public class Default extends aWeapon
             }
             
             eControl.INSTANCE.attach(new BrokenFinger(x, y, direction), iSubject.ObsTypes.PROJECTILE);
+            Utility.playSound("/Resources/Sounds/shot.wav");
         }
     }
 }

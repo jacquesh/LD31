@@ -7,6 +7,7 @@ import util.Utility;
 
 public abstract class Enemy implements iObserver
 {
+    private static Sprite highlight64;
     private static Sprite highlight32;
     private static Sprite highlight16;
 
@@ -19,6 +20,7 @@ public abstract class Enemy implements iObserver
     
     static
     {
+        highlight64 = new Sprite(Utility.loadImage("/Resources/Images/Enemies/enemyBorder64.png"), 32, 32);
         highlight32 = new Sprite(Utility.loadImage("/Resources/Images/Enemies/enemyBorder32.png"), 16, 16);
         highlight16 = new Sprite(Utility.loadImage("/Resources/Images/Enemies/enemyBorder16.png"), 8, 8);
     }
@@ -77,7 +79,11 @@ public abstract class Enemy implements iObserver
     public void draw(Graphics2D g)
     {
         int w = spr.image.getWidth();
-        if(w == 28)
+        if(w == 60)
+        {
+            higlight64.draw(g,x,y,rotation);
+        }
+        else if(w == 28)
         {
             highlight32.draw(g,x,y,rotation);
         }

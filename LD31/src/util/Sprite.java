@@ -34,4 +34,17 @@ public class Sprite
         t.translate(-offset_x-0.5, -offset_y-0.5);  //Set origin.
         g.drawImage(image, t, null);
     }
+
+    public void draw(Graphics2D g, double x, double y, double rotation, double scaleX, double scaleY)
+    {
+        /* A value of 0.5 is added|subtracted to|from the position|origin values in order to align
+         *  the origin with a single pixel.
+         */
+        AffineTransform t = new AffineTransform();
+        t.translate(x+0.5, y+0.5);                  //Positioning.
+        t.rotate(rotation);                         //Rotation.
+        t.scale(scaleX, scaleY);                    //Scaling.
+        t.translate(-offset_x-0.5, -offset_y-0.5);  //Set origin.
+        g.drawImage(image, t, null);
+    }
 }

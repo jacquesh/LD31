@@ -3,6 +3,8 @@ package states;
 import core.Canvas;
 import core.Main;
 import enemies.Basic;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -41,6 +43,9 @@ public class Game implements iState
     private ArrayList<iObserver> destroyList;
     private Destroyer destroyer;
 
+    private Font countdownFont;
+    private Color countdownBackground;
+
     @Override
     public void init()
     {
@@ -50,6 +55,8 @@ public class Game implements iState
         destroyList = new ArrayList<iObserver>();
         destroyer = new Destroyer();
         currentWave = 0;
+        countdownFont = Utility.loadFont("/Resources/Fonts/PowerGreen.ttf", Font.TRUETYPE_FONT, Font.PLAIN, 48);
+        countdownBackground = new Color(0, 0, 0, 128);
 
         reset();
         player.reset();
@@ -165,6 +172,14 @@ public class Game implements iState
         {
             destroyer.draw(g);
         }
+
+        g.setColor(countdownBackground);
+        g.fillRoundRect((Canvas.hSize/2)-60, Canvas.vSize-52, 120,50, 30,30);
+
+        double timeLeft = (WAVE_LENGTH - waveTime)/30.0;
+        g.setColor(Color.white);
+        g.setFont(countdownFont);
+        g.drawString(String.format("%.2f", timeLeft), Canvas.hSize/2 - 50, Canvas.vSize - 10);
     }
 
     private void spawnEnemy()

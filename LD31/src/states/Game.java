@@ -69,6 +69,27 @@ public class Game implements iState
     private void spawnEnemy()
     {
         GridPoint spawnLoc = spawnLocQueue.poll();
+        spawnLocUsed[spawnLoc.y][spawnLoc.x] = true;
+
+        for(int y=-1; y<=1; ++y)
+        {
+            for(int x=-1; x<=1; ++x)
+            {
+                if(x == 0 && y == 0)
+                    continue;
+                int tempX = spawnLoc.x + x;
+                int tempY = spawnLoc.y + y;
+                if(tempX < 0 || tempX >= spawnLocUsed[0].length || tempY < 0 || tempY >= spawnLocUsed.length)
+                    continue;
+                if(spawnLocUsed[tempY][tempX])
+                    continue;
+                GridPoint newPoint = new GridPoint(tempX, tempY);
+                if(spawnLocQueue.contains(newPoint))
+                    continue;
+                spawnLocQueue.add(newPoint);
+            }
+        }
+
         int spawnX = (spawnLoc.x * GRID_SIZE) + GRID_SIZE/2;
         int spawnY = (spawnLoc.y * GRID_SIZE) + GRID_SIZE/2;
         control.attach(new Emptiness(spawnX, spawnY, GRID_SIZE, GRID_SIZE));

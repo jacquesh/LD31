@@ -81,7 +81,7 @@ public abstract class Enemy implements iObserver
         int w = spr.image.getWidth();
         if(w == 60)
         {
-            higlight64.draw(g,x,y,rotation);
+            highlight64.draw(g,x,y,rotation);
         }
         else if(w == 28)
         {

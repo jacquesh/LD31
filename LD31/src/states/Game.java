@@ -102,13 +102,13 @@ public class Game implements iState
                 {
                     Enemy e = (Enemy)obs;
                     if(e.x < destroyer.x)
-                        control.observers.remove(e);
+                        control.getObservers(iSubject.ObsTypes.ENEMY).remove(e);
                 }
                 else if(obs instanceof Emptiness)
                 {
                     Emptiness e = (Emptiness)obs;
                     if(e.x < destroyer.x)
-                        control.observers.remove(e);
+                        control.getObservers(iSubject.ObsTypes.GENERAL).remove(e);
                 }
             }
             ++waveEndTime;
@@ -127,7 +127,7 @@ public class Game implements iState
                 currentWave = (currentWave < 4) ? currentWave+1 : currentWave; //Clamp to 4
                 waveTime = 0;
                 waveEnded = true;
-                for(iObserver iob : control.observers)
+                for(iObserver iob : control.getObservers(iSubject.ObsTypes.ENEMY))
                 {
                     if((iob instanceof Enemy) || (iob instanceof Emptiness))
                     {
@@ -191,11 +191,8 @@ public class Game implements iState
 
         int spawnX = (spawnLoc.x * GRID_SIZE) + GRID_SIZE/2;
         int spawnY = (spawnLoc.y * GRID_SIZE) + GRID_SIZE/2;
-<<<<<<< HEAD
-        control.attach(new Emptiness(spawnX, spawnY, GRID_SIZE, GRID_SIZE), iSubject.ObsTypes.GENERAL);
-        control.attach(new Basic(spawnX, spawnY), iSubject.ObsTypes.ENEMY);
-=======
-        control.attach(new Emptiness(spawnX, spawnY, GRID_SIZE, GRID_SIZE));
+
+        control.attach(new Emptiness(spawnX, spawnY, GRID_SIZE, GRID_SIZE), iSubject.ObsTypes.ENEMY);
 
         Enemy newEnemy = null;
         double spawnSeed = Math.random();
@@ -223,8 +220,7 @@ public class Game implements iState
             }
         }
 
-        control.attach(newEnemy);
->>>>>>> origin/master
+        control.attach(newEnemy, iSubject.ObsTypes.ENEMY);
     }
 
     @Override

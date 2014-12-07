@@ -15,6 +15,7 @@ import core.Canvas;
 import core.Main;
 import enemies.Enemy;
 import enemies.Basic;
+import enemies.Splitter;
 import units.Player;
 import units.Emptiness;
 import units.Destroyer;
@@ -220,7 +221,7 @@ public class Game implements iState
         {
             spawnProb += WaveData.waveData[currentWave].spawnChance[1];
             if(spawnSeed < spawnProb)
-                newEnemy = new Basic(spawnX, spawnY); // Enemy 1
+                newEnemy = new Splitter(spawnX, spawnY); // Enemy 1
             else
             {
                 spawnProb += WaveData.waveData[currentWave].spawnChance[2];
@@ -228,11 +229,7 @@ public class Game implements iState
                     newEnemy = new Basic(spawnX, spawnY); // Enemy 2
                 else
                 {
-                    spawnProb += WaveData.waveData[currentWave].spawnChance[3];
-                    if(spawnSeed < spawnProb)
-                        newEnemy = new Basic(spawnX, spawnY); // Enemy 3
-                    else
-                        newEnemy = new Basic(spawnX, spawnY); // Enemy 4
+                    newEnemy = new Basic(spawnX, spawnY); // Enemy 3
                 }
             }
         }

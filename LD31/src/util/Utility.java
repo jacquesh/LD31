@@ -5,6 +5,7 @@ import java.awt.FontFormatException;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.Properties;
 import javax.imageio.ImageIO;
@@ -56,7 +57,8 @@ public class Utility
         {
             Clip result = AudioSystem.getClip();
             InputStream resource = path.getClass().getResourceAsStream(str);
-            AudioInputStream stream = AudioSystem.getAudioInputStream(resource);
+            InputStream bufferedResource = new BufferedInputStream(resource);
+            AudioInputStream stream = AudioSystem.getAudioInputStream(bufferedResource);
             
             result.open(stream);
             result.start();
